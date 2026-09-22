@@ -340,7 +340,9 @@ h1 .pdot{color:var(--orange);-webkit-text-fill-color:var(--orange)}
   .zoomin,.domi{transform:translateY(-50%)!important}
   .plane{opacity:1}
 }
-@media (orientation:portrait) and (max-width:820px){.stage{padding:0}#deck{position:fixed;top:50%;left:50%;border-radius:12px;width:min(100vh,177.78vw);height:calc(min(100vh,177.78vw)*0.5625);transform:translate(-50%,-50%) rotate(90deg)}.hint,.fs{display:none}}
+.mnav{display:none;position:absolute;top:50%;transform:translateY(-50%);z-index:30;width:9cqw;height:9cqw;border-radius:50%;background:rgba(255,255,255,.72);border:1px solid rgba(12,42,71,.18);color:var(--ink);box-shadow:var(--sh);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);cursor:pointer;font-size:5cqw;font-weight:700;align-items:center;justify-content:center;padding-bottom:.6cqw}
+.mnav.mL{left:-4.5cqw}.mnav.mR{right:-4.5cqw}
+@media (orientation:portrait) and (max-width:820px){.stage{padding:0}#deck{position:fixed;top:50%;left:50%;border-radius:0;overflow:visible;width:min(100vh,177.78vw);height:calc(min(100vh,177.78vw)*0.5625);transform:translate(-50%,-50%) rotate(90deg)}.hint,.fs,.controls{display:none}.mnav{display:flex}}
 </style>
 </head>
 <body>
@@ -591,6 +593,7 @@ addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key===" "){e.preventDe
 document.getElementById("deck").addEventListener("click",e=>{if(e.target.closest("a,button,.dot"))return;const r=document.getElementById("deck").getBoundingClientRect();if(e.clientX-r.left>r.width*.64)go(cur+1);});
 document.getElementById("fs").onclick=()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();};
 addEventListener("load",()=>setTimeout(typeIt,reduce?0:2000));
+["mL","mR"].forEach(c=>{const b=document.createElement('button');b.className='mnav '+c;b.textContent=c==='mL'?'\u2039':'\u203a';b.onclick=e=>{e.stopPropagation();go(cur+(c==='mR'?1:-1));};document.getElementById('deck').appendChild(b);});
 </script>
 </body>
 </html>
